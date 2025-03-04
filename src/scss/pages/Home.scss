@@ -1,0 +1,13 @@
+@use '../config' as *;
+
+.grid-price-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    background: $secondary-color;
+    position: absolute;
+    right: 0;
+    top: 15rem;
+    border-radius: 10px 0px 0px 10px;
+}
