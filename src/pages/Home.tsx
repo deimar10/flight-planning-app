@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
 import '../scss/pages/Home.scss';
-import FlightFilters from '../scss/components/FlightFilters';
+import FlightFilters from '../components/FlightFilters';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -52,23 +52,27 @@ function Home() {
     };
 
   return (
-    <div>
-        <FlightFilters onFilter={handleFilter} />
-        <Box sx={{ flexGrow: 1, margin: "auto", padding: 2 }}>
-            <Grid className="flight-grid" container spacing={2} justifyContent="center">
-                {filteredFlights.map((flight) => (
-                    <Grid className="flight-card" size={{ xs: 12, sm: 3 }} sx={{ textAlign: "left" }} key={flight.id}>
-                        <Item sx={{ position: "relative" }}>
-                            <div className="grid-price-tag">
-                                <h3>{flight.price}$</h3>
-                            </div>
-                        </Item>
-                        <h2>{flight.title}</h2>
-                        <h3>{flight.startDate} - {flight.endDate}</h3>
-                    </Grid>
-                ))}
-            </Grid>
-        </Box>
+    <div className="home-main-container">
+        <div className="home-column">
+            <FlightFilters onFilter={handleFilter} />
+        </div>
+        <div className="home-column">
+            <Box sx={{ flexGrow: 1, margin: "auto", padding: 2 }}>
+                <Grid className="flight-grid" container spacing={2} justifyContent="center">
+                    {filteredFlights.map((flight) => (
+                        <Grid className="flight-card" size={{ xs: 12, sm: 3 }} sx={{ textAlign: "left" }} key={flight.id}>
+                            <Item sx={{ position: "relative" }}>
+                                <div className="grid-price-tag">
+                                    <h3>{flight.price}$</h3>
+                                </div>
+                            </Item>
+                            <h2>{flight.title}</h2>
+                            <h3>{flight.startDate} - {flight.endDate}</h3>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>
+        </div>
     </div>
   );
 }

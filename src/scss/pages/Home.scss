@@ -1,18 +1,70 @@
 @use '../config' as *;
 
-.flight-grid {
-    justify-content: left !important;
-    .flight-card {
-        .grid-price-tag {
+.home-main-container {
+    display: flex;
+    gap: 60px;
+    padding: 16px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    .home-column {
+        &:first-of-type {
+            max-width: 300px;
+            position: sticky;
+            top: 48px;
+            height: fit-content;
+        }
+        &:last-of-type {
+            width: 75%;
+            flex: 1;
+        }
+    }
+    .MuiBox-root {
+        padding: 0px;
+        .flight-grid {
+            justify-content: flex-start;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45%;
-            background: $secondary-color;
-            position: absolute;
-            right: 0;
-            top: 15rem;
-            border-radius: 10px 0px 0px 10px;
+            flex-wrap: wrap;
+            .flight-card {
+                position: relative;
+                min-width: 250px;
+                .grid-price-tag {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    max-width: 45%;
+                    min-width: 120px;
+                    background: $secondary-color;
+                    color: $text-color-light;
+                    position: absolute;
+                    right: 0;
+                    bottom: 50px;
+                    border-radius: 10px 0px 0px 10px;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 1900px) {
+        .flight-grid {
+            .flight-card {
+                flex: 1 1 calc(33.333% - 16px); // 3 cards per row on medium screens
+            }
+        }
+    }
+
+    @media (max-width: 1525px) {
+        .flight-grid {
+            .flight-card {
+                flex: 1 1 calc(50% - 16px); // 2 cards per row on medium screens
+            }
+        }
+    }
+    
+    @media (max-width: 1190px) {
+        .flight-grid {
+            .flight-card {
+                flex: 1 1 100%; // 1 card per row on small screens
+            }
         }
     }
 }

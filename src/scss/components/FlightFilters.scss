@@ -1,0 +1,12 @@
+@use '../config' as *;
+
+.flight-filter-main-container {
+    .flight-filter-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+    }
+}
