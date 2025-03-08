@@ -1,6 +1,7 @@
 import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Home from './pages/Home';
+import FlightDetails from './pages/FlightDetails';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { ThemeProvider, CssBaseline } from "@mui/material";
@@ -17,6 +18,8 @@ function App() {
             <BrowserRouter>
               <Routes>
                   <Route index element={<Home/>}
+                  />
+                  <Route path="/flight-details/:id" element={<FlightDetails/>}
                   />
               </Routes>
             </BrowserRouter>

@@ -6,6 +6,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
 import '../scss/pages/Home.scss';
 import FlightFilters from '../components/FlightFilters';
+import {useParams, useNavigate} from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -19,6 +20,9 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Home() {
+
+    const navigate = useNavigate();
+    let { id } = useParams();
 
     const filters = [
         { id: 1, title: "Flight 1", startDate: "2025/03/07", endDate: "2025/03/14", price: 635},
@@ -51,6 +55,10 @@ function Home() {
         setfilteredFlights(filtered);
     };
 
+    const handleFlight = (id: number) => {
+        navigate(`/flight-details/${id}`);
+    }
+
   return (
     <div className="home-main-container">
         <div className="home-column">
@@ -61,7 +69,7 @@ function Home() {
                 <Grid className="flight-grid" container spacing={2} justifyContent="center">
                     {filteredFlights.map((flight) => (
                         <Grid className="flight-card" size={{ xs: 12, sm: 3 }} sx={{ textAlign: "left" }} key={flight.id}>
-                            <Item sx={{ position: "relative" }}>
+                            <Item sx={{ position: "relative" }} onClick={() => handleFlight(flight.id)}>
                                 <div className="grid-price-tag">
                                     <h3>{flight.price}$</h3>
                                 </div>
