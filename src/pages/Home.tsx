@@ -22,7 +22,6 @@ const Item = styled(Paper)(({ theme }) => ({
 function Home() {
 
     const navigate = useNavigate();
-    let { id } = useParams();
 
     const filters = [
         { id: 1, title: "Flight 1", startDate: "2025/03/07", endDate: "2025/03/14", price: 635},
