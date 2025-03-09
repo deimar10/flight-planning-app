@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
 import '../scss/pages/Home.scss';
 import FlightFilters from '../components/FlightFilters';
-import {useParams, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
