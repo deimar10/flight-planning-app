@@ -1,0 +1,32 @@
+@use '../config' as *;
+
+.seat-filter-main-container {
+    height: 600px;
+    .seat-filter-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        height: 100%;
+        padding: 25px;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+        .checkbox-wrapper {
+            text-align: left;
+        }
+        .quantity-wrapper {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            flex-direction: column;
+            text-align: left;
+        }
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3f51b5;
+            margin: 0px;
+        }
+    }
+}
