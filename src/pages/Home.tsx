@@ -24,16 +24,16 @@ function Home() {
     const navigate = useNavigate();
 
     const filters = [
-        { id: 1, title: "Flight 1", startDate: "2025/03/07", endDate: "2025/03/14", price: 635},
-        { id: 2, title: "Flight 2", startDate: "2025/03/11", endDate: "2025/03/25", price: 1500},
-        { id: 3, title: "Flight 3", startDate: "2025/03/11", endDate: "2025/03/25", price: 1500},
-        { id: 4, title: "Flight 4", startDate: "2025/03/11", endDate: "2025/03/25", price: 1500},
-        { id: 5, title: "Flight 5", startDate: "2025/03/11", endDate: "2025/03/14", price: 1500},
-        { id: 6, title: "Flight 6", startDate: "2025/03/07", endDate: "2025/03/14", price: 1500},
-        { id: 7, title: "Flight 6", startDate: "2025/03/07", endDate: "2025/03/14", price: 1500},
-        { id: 8, title: "Flight 6", startDate: "2025/03/07", endDate: "2025/03/14", price: 163},
-        { id: 9, title: "Flight 6", startDate: "2025/03/07", endDate: "2025/03/14", price: 1500},
-        { id: 10, title: "Flight 10", startDate: "2025/03/07", endDate: "2025/03/14", price: 163},
+        { id: 1, origin: "Tallinn", destination: "Madrid", startDate: "2025/03/07", endDate: "2025/03/14", price: 635},
+        { id: 2, origin: "Tallinn", destination: "Roma", startDate: "2025/03/11", endDate: "2025/03/25", price: 1500},
+        { id: 3, origin: "Tallinn", destination: "Berlin", startDate: "2025/03/11", endDate: "2025/03/25", price: 1500},
+        { id: 4, origin: "Tallinn", destination: "Milano", startDate: "2025/03/11", endDate: "2025/03/25", price: 1500},
+        { id: 5, origin: "Tallinn", destination: "Paris", startDate: "2025/03/11", endDate: "2025/03/14", price: 1500},
+        { id: 6, origin: "Tallinn", destination: "Stockholm", startDate: "2025/03/07", endDate: "2025/03/14", price: 1500},
+        { id: 7, origin: "Tallinn", destination: "Madrid", startDate: "2025/03/07", endDate: "2025/03/14", price: 1500},
+        { id: 8, origin: "Tallinn", destination: "Madrid", startDate: "2025/03/07", endDate: "2025/03/14", price: 163},
+        { id: 9, origin: "Tallinn", destination: "Madrid", startDate: "2025/03/07", endDate: "2025/03/14", price: 1500},
+        { id: 10, origin: "Tallinn", destination: "Madrid", startDate: "2025/03/07", endDate: "2025/03/14", price: 163},
     ];
 
     const [filteredFlights, setfilteredFlights] = useState(filters);
@@ -42,7 +42,7 @@ function Home() {
         let filtered = filters;
 
         if (search) {
-            filtered = filtered.filter((flight) =>flight.title.toLowerCase().includes(search.toLowerCase()));
+            filtered = filtered.filter((flight) =>flight.destination.toLowerCase().includes(search.toLowerCase()));
         }
         if (selectedStartDate && selectedEndDate) {
             filtered = filtered.filter((flight) => flight.startDate <= selectedStartDate && flight.endDate >= selectedEndDate);
@@ -74,7 +74,7 @@ function Home() {
                                     <h3>{flight.price}$</h3>
                                 </div>
                             </Item>
-                            <h2>{flight.title}</h2>
+                            <h2>{flight.origin} - {flight.destination}</h2>
                             <h3>{flight.startDate} - {flight.endDate}</h3>
                         </Grid>
                     ))}
