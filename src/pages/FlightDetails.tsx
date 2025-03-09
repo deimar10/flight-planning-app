@@ -1,5 +1,6 @@
 import React from "react";
 import '../scss/pages/FlightDetails.scss';
+import SeatFilters from "../components/SeatFilters";
 import { Button } from "@mui/material";
 import { useNavigate} from 'react-router-dom';
 
@@ -18,7 +19,7 @@ function FlightDetails () {
             </div>
             <div className="flight-details-column-wrapper">
                 <div className="flight-details-column">
-                   
+                    <SeatFilters />
                 </div>
                 <div className="flight-details-column">
                 
