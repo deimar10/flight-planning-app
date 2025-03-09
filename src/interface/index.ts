@@ -1,5 +1,6 @@
 export interface FlightFiltersInterface {
     search: string;
-    date: string | null;
+    selectedStartDate: string | null;
+    selectedEndDate: string | null;
     price: number[];
 }

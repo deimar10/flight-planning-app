@@ -11,11 +11,17 @@ interface Props {
 
 const FlightFilters = ({ onFilter }: Props) => {
   const [search, setSearch] = useState("");
-  const [date, setDate] = useState<Dayjs | null>(null);
+  const [startDate, setStartDate] = useState<Dayjs | null>(null);
+  const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const [price, setPrice] = useState([0, 1500]);
 
   const handleFilter = () => {
-    onFilter({ search,  date: date ? date.format("YYYY/MM/DD") : null, price });
+    onFilter({ 
+      search,  
+      selectedStartDate: startDate ? startDate.format("YYYY/MM/DD") : null,
+      selectedEndDate: endDate ? endDate.format("YYYY/MM/DD") : null, 
+      price 
+    });
   };
 
   return (
@@ -29,9 +35,15 @@ const FlightFilters = ({ onFilter }: Props) => {
           size="medium"
         />
         <DatePicker
-          label="Select Date"
-          value={date}
-          onChange={(newDate) => setDate(newDate)}
+            label="Start Date"
+            value={startDate}
+            onChange={(newValue) => setStartDate(newValue)}
+        />
+        <DatePicker
+            label="End Date"
+            value={endDate}
+            onChange={(newValue) => setEndDate(newValue)}
+            minDate={startDate || undefined} // Prevents selecting an end date before the start date
         />
         <div className="flight-filter-range-wrapper">
           <Typography gutterBottom>Price Range (€)</Typography>

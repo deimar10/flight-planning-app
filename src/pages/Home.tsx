@@ -38,14 +38,15 @@ function Home() {
 
     const [filteredFlights, setfilteredFlights] = useState(filters);
 
-    const handleFilter = ({ search, date, price }: FlightFiltersInterface) => {
+    const handleFilter = ({ search, selectedStartDate, selectedEndDate, price }: FlightFiltersInterface) => {
         let filtered = filters;
 
         if (search) {
             filtered = filtered.filter((flight) =>flight.title.toLowerCase().includes(search.toLowerCase()));
         }
-        if (date) {
-            filtered = filtered.filter((flight) => flight.startDate <= date && flight.endDate >= date);
+        if (selectedStartDate && selectedEndDate) {
+            filtered = filtered.filter((flight) => flight.startDate <= selectedStartDate && flight.endDate >= selectedEndDate);
+           /*  filtered = filtered.filter((flight) => flight.startDate <= date && flight.endDate >= date); */
         }
         if (price.length === 2) {
             filtered = filtered.filter((flight) => flight.price >= price[0] && flight.price <= price[1]);
