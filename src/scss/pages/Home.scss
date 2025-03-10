@@ -21,50 +21,56 @@
     .MuiBox-root {
         padding: 0px;
         .flight-grid {
-            justify-content: flex-start;
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // Auto-adjusting columns
+            gap: 30px;
             .flight-card {
                 position: relative;
                 min-width: 250px;
-                .grid-price-tag {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    max-width: 45%;
-                    min-width: 120px;
-                    background: $secondary-color;
-                    color: $text-color-light;
-                    position: absolute;
-                    right: 0;
-                    bottom: 50px;
-                    border-radius: 10px 0px 0px 10px;
+                width: 370px;
+                .flight-card-item {
+                    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+                    cursor: pointer;
+                    max-width: 100%;
+                    .pin-img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 250px;
+                    }
+                    .grid-price-tag {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        max-width: 45%;
+                        min-width: 120px;
+                        background: $secondary-color;
+                        color: $text-color-light;
+                        position: absolute;
+                        right: 0;
+                        bottom: 50px;
+                        border-radius: 10px 0px 0px 10px;
+                        transform: translate(0, 0);
+                    }
                 }
             }
         }
     }
 
-    @media (max-width: 1900px) {
-        .flight-grid {
-            .flight-card {
-                flex: 1 1 calc(33.333% - 16px); // 3 cards per row on medium screens
-            }
+    @media (max-width: 768px) {
+        .home-main-container {
+            flex-direction: column; // Stack items on small screens
+            align-items: center;
         }
-    }
-
-    @media (max-width: 1525px) {
-        .flight-grid {
-            .flight-card {
-                flex: 1 1 calc(50% - 16px); // 2 cards per row on medium screens
-            }
+        
+        .home-column:first-of-type {
+            max-width: 100%;
+            position: relative; // Remove sticky behavior for mobile
         }
-    }
-    
-    @media (max-width: 1190px) {
+        
         .flight-grid {
-            .flight-card {
-                flex: 1 1 100%; // 1 card per row on small screens
-            }
+            grid-template-columns: 1fr; // Single column for small screens
         }
     }
 }

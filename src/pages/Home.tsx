@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid2';
 import '../scss/pages/Home.scss';
 import FlightFilters from '../components/FlightFilters';
 import { useNavigate} from 'react-router-dom';
+import pin from '/assets/pin.jpg';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -69,7 +70,8 @@ function Home() {
                 <Grid className="flight-grid" container spacing={2} justifyContent="center">
                     {filteredFlights.map((flight) => (
                         <Grid className="flight-card" size={{ xs: 12, sm: 3 }} sx={{ textAlign: "left" }} key={flight.id}>
-                            <Item sx={{ position: "relative" }} onClick={() => handleFlight(flight.id)}>
+                            <Item className="flight-card-item" sx={{ position: "relative" }} onClick={() => handleFlight(flight.id)}>
+                                <img className="pin-img" src={pin} alt="pin" />
                                 <div className="grid-price-tag">
                                     <h3>{flight.price}$</h3>
                                 </div>
