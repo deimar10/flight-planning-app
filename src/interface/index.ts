@@ -4,3 +4,12 @@ export interface FlightFiltersInterface {
     selectedEndDate: string | null;
     price: number[];
 }
+
+export interface FlightDataInterface {
+    id: number,
+    origin: string,
+    destination: string,
+    startDate: string,
+    endDate: string,
+    price: number
+}

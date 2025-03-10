@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {FlightFiltersInterface} from "../interface";
+import React, { useState, useEffect } from "react";
+import {FlightDataInterface, FlightFiltersInterface} from "../interface";
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -20,27 +20,18 @@ const Item = styled(Paper)(({ theme }) => ({
   display: "flex",
 }));
 
-function Home() {
+interface Props {
+    flights: FlightDataInterface[],
+}
+
+function Home({flights}: Props) {
 
     const navigate = useNavigate();
 
-    const filters = [
-        { id: 1, origin: "Tallinn", destination: "Madrid", startDate: "2025/03/07", endDate: "2025/03/14", price: 635},
-        { id: 2, origin: "Tallinn", destination: "Roma", startDate: "2025/03/11", endDate: "2025/03/25", price: 1500},
-        { id: 3, origin: "Tallinn", destination: "Berlin", startDate: "2025/03/11", endDate: "2025/03/25", price: 1500},
-        { id: 4, origin: "Tallinn", destination: "Milano", startDate: "2025/03/11", endDate: "2025/03/25", price: 1500},
-        { id: 5, origin: "Tallinn", destination: "Paris", startDate: "2025/03/11", endDate: "2025/03/14", price: 1500},
-        { id: 6, origin: "Tallinn", destination: "Stockholm", startDate: "2025/03/07", endDate: "2025/03/14", price: 1500},
-        { id: 7, origin: "Tallinn", destination: "Madrid", startDate: "2025/03/07", endDate: "2025/03/14", price: 1500},
-        { id: 8, origin: "Tallinn", destination: "Madrid", startDate: "2025/03/07", endDate: "2025/03/14", price: 163},
-        { id: 9, origin: "Tallinn", destination: "Madrid", startDate: "2025/03/07", endDate: "2025/03/14", price: 1500},
-        { id: 10, origin: "Tallinn", destination: "Madrid", startDate: "2025/03/07", endDate: "2025/03/14", price: 163},
-    ];
-
-    const [filteredFlights, setfilteredFlights] = useState(filters);
+    const [filteredFlights, setfilteredFlights] = useState(flights);
 
     const handleFilter = ({ search, selectedStartDate, selectedEndDate, price }: FlightFiltersInterface) => {
-        let filtered = filters;
+        let filtered = flights;
 
         if (search) {
             filtered = filtered.filter((flight) =>flight.destination.toLowerCase().includes(search.toLowerCase()));
@@ -59,6 +50,10 @@ function Home() {
     const handleFlight = (id: number) => {
         navigate(`/flight-details/${id}`);
     }
+
+    useEffect(() => {
+        setfilteredFlights(flights);
+    },[flights]);
 
   return (
     <div className="home-main-container">
