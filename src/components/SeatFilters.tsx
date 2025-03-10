@@ -5,6 +5,15 @@ import { Button, TextField, FormControlLabel, Checkbox } from "@mui/material";
 const SeatFilters = () => {
 
     const [quantity, setQuantity] = useState(1);
+    const [calculatedPrice, setCalculatedPrice] = useState<number>(635);
+
+    const calculate = () => {
+        setCalculatedPrice(635  * quantity);
+    }
+
+    const handleFilter = () => {
+        calculate();
+    }
 
     return (
         <div className="seat-filter-main-container">
@@ -25,7 +34,7 @@ const SeatFilters = () => {
                     />
                 </div>
                 <div className="quantity-wrapper">
-                    <h3 className="price">$635</h3>
+                    <h3 className="price">${calculatedPrice}</h3>
                     <TextField
                         type="number"
                         label="Seats"
@@ -35,7 +44,7 @@ const SeatFilters = () => {
                         onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
                         inputProps={{ min: 1, max: 10 }}
                     />
-                <Button variant="contained">Apply filters</Button>
+                <Button variant="contained" onClick={handleFilter}>Apply filters</Button>
                 </div>
             </fieldset>
         </div>
