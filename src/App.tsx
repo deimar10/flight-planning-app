@@ -18,7 +18,26 @@ function App() {
     axios.get('http://localhost:8080/api/flights')
       .then(response => {
         console.log("Fetched flights:", response.data);
-        setFlights(response.data || []);
+
+        const changeDateFormat = response.data.map((flight: FlightDataInterface) => {
+          const startDate = new Date(flight.startDate);
+          const endDate = new Date(flight.endDate);
+
+          // Ensure MM/DD/YYYY format with leading zeros
+          const formatDate = (date: Date) => {
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${month}/${day}/${year}`;
+          };
+
+          return {
+            ...flight,
+            startDate: formatDate(startDate),
+            endDate: formatDate(endDate),
+          };
+        });
+        setFlights(changeDateFormat || []);
       })
       .catch(error => console.error("Error fetching campaigns:", error));
   },[]);

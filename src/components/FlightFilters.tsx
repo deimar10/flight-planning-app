@@ -10,16 +10,16 @@ interface Props {
 }
 
 const FlightFilters = ({ onFilter }: Props) => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState<string>("");
   const [startDate, setStartDate] = useState<Dayjs | null>(null);
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
-  const [price, setPrice] = useState([0, 1500]);
+  const [price, setPrice] = useState<number[]>([0, 1500]);
 
   const handleFilter = () => {
     onFilter({ 
       search,  
-      selectedStartDate: startDate ? startDate.format("YYYY/MM/DD") : null,
-      selectedEndDate: endDate ? endDate.format("YYYY/MM/DD") : null, 
+      selectedStartDate: startDate ? startDate.format("MM/DD/YYYY") : null,
+      selectedEndDate: endDate ? endDate.format("MM/DD/YYYY") : null, 
       price 
     });
   };
