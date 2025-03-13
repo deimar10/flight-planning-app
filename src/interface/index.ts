@@ -13,3 +13,9 @@ export interface FlightDataInterface {
     endDate: string,
     price: number
 }
+
+export interface SeatFiltersInterface {
+    hasWindow: boolean,
+    hasLegSpace: boolean,
+    closeToExit: boolean
+}

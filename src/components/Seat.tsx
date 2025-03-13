@@ -7,11 +7,11 @@ type SeatProps = {
   hasWindow: boolean;
   closeToExit: boolean;
   hasLegroom: boolean;
+  isHighlighted?: boolean;
   onSelect: () => void;
 };
 
-function Seat({seatNumber, isOccupied, hasWindow, closeToExit, hasLegroom, onSelect }: SeatProps) {
-    
+function Seat({ seatNumber, isOccupied, isHighlighted, onSelect }: SeatProps) {
   return (
     <Button
       onClick={onSelect}
@@ -20,8 +20,8 @@ function Seat({seatNumber, isOccupied, hasWindow, closeToExit, hasLegroom, onSel
         width: 50,
         height: 50,
         margin: "5px",
-        backgroundColor: isOccupied ? "#ddd" : "#4caf50",
-        border: hasWindow ? "3px solid blue" : closeToExit ? "3px solid orange" : hasLegroom ? "3px solid green" : "1px solid gray",
+        backgroundColor: isOccupied ? "#ddd" : isHighlighted ? "#FFD700" : "#4caf50",
+        border: isOccupied ? "1px solid grey" : "3px solid green",
         color: "#fff",
         fontSize: "12px",
       }}

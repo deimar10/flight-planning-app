@@ -1,19 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../scss/components/SeatFilters.scss';
 import { Button, TextField, FormControlLabel, Checkbox } from "@mui/material";
+import { SeatFiltersInterface } from "../interface";
 
-const SeatFilters = () => {
+interface Props {
+    onFilter: (filters: SeatFiltersInterface) => void; 
+}
+
+const SeatFilters = ({ onFilter }: Props) => {
 
     const [quantity, setQuantity] = useState(1);
     const [calculatedPrice, setCalculatedPrice] = useState<number>(635);
+    const [filters, setFilters] = useState<SeatFiltersInterface>({
+        hasWindow: false,
+        hasLegSpace: false,
+        closeToExit: false
+    });
 
     const calculate = () => {
         setCalculatedPrice(635  * quantity);
     }
 
-    const handleFilter = () => {
-        calculate();
-    }
+    const handleFilterChange = (filterName: keyof SeatFiltersInterface) => {
+        setFilters(prevFilters => {
+            const updatedFilters = { ...prevFilters, [filterName]: !prevFilters[filterName] };
+            return updatedFilters;
+        });
+    };
+
+    useEffect(() => {
+        onFilter(filters);
+    }, [filters])
 
     return (
         <div className="seat-filter-main-container">
@@ -21,15 +38,21 @@ const SeatFilters = () => {
                 <legend>Seat Preferences</legend>
                 <div className="checkbox-wrapper">
                     <FormControlLabel
-                        control={<Checkbox id="window" value="window" />}
+                        control={<Checkbox />}
+                        checked={filters.hasWindow}
+                        onChange={() => handleFilterChange("hasWindow")}
                         label="Window Seat"
                     />
                     <FormControlLabel
-                        control={<Checkbox id="leg-space" value="leg-space" />}
+                        control={<Checkbox />}
+                        checked={filters.hasLegSpace}
+                        onChange={() => handleFilterChange("hasLegSpace")}
                         label="Extra Legroom"
                     />
                     <FormControlLabel
-                        control={<Checkbox id="exit" value="close-to-exit" />}
+                        control={<Checkbox />}
+                        checked={filters.closeToExit}
+                        onChange={() => handleFilterChange("closeToExit")}
                         label="Close to Exit"
                     />
                 </div>
@@ -44,7 +67,7 @@ const SeatFilters = () => {
                         onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
                         inputProps={{ min: 1, max: 10 }}
                     />
-                <Button variant="contained" onClick={handleFilter}>Apply filters</Button>
+                  <Button variant="contained">Apply filters</Button>
                 </div>
             </fieldset>
         </div>
