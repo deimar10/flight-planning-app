@@ -28,7 +28,7 @@ const FlightFilters = ({ onFilter }: Props) => {
     <div className="flight-filter-main-container">
       <div className="flight-filter-wrapper">
         <TextField
-          label="Search by Title"
+          label="Search by Destination"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           variant="outlined"
