@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../scss/pages/FlightDetails.scss';
 import SeatFilters from "../components/SeatFilters";
 import { Button } from "@mui/material";
@@ -7,30 +7,15 @@ import { Typography } from "@mui/material";
 import Grid from '@mui/material/Grid2';
 import Seat from "../components/Seat";
 import { SeatFiltersInterface } from "../interface";
+import { SeatDataInterface } from '../interface';
 
-function FlightDetails () {
+interface Props {
+    seatsData: SeatDataInterface[],
+}
 
-    const sampleSeats = [
-        { id: 1, seatNumber: "1A", isOccupied: false, hasWindow: true, closeToExit: false, hasLegroom: false },
-        { id: 2, seatNumber: "1B", isOccupied: true, hasWindow: false, closeToExit: false, hasLegroom: false },
-        { id: 3, seatNumber: "1C", isOccupied: false, hasWindow: false, closeToExit: false, hasLegroom: false },
-        { id: 4, seatNumber: "2A", isOccupied: false, hasWindow: false, closeToExit: false, hasLegroom: false },
-        { id: 5, seatNumber: "2B", isOccupied: false, hasWindow: false, closeToExit: false, hasLegroom: false },
-        { id: 6, seatNumber: "2C", isOccupied: false, hasWindow: true, closeToExit: false, hasLegroom: false },
-        { id: 7, seatNumber: "3A", isOccupied: true, hasWindow: true, closeToExit: false, hasLegroom: false },
-        { id: 8, seatNumber: "3B", isOccupied: true, hasWindow: false, closeToExit: false, hasLegroom: false },
-        { id: 9, seatNumber: "3C", isOccupied: false, hasWindow: false, closeToExit: false, hasLegroom: false },
-        { id: 10, seatNumber: "4A", isOccupied: false, hasWindow: false, closeToExit: false, hasLegroom: false },
-        { id: 11, seatNumber: "4B", isOccupied: false, hasWindow: false, closeToExit: false, hasLegroom: false },
-        { id: 12, seatNumber: "4C", isOccupied: true, hasWindow: true, closeToExit: false, hasLegroom: false },
-        { id: 13, seatNumber: "5A", isOccupied: false, hasWindow: true, closeToExit: false, hasLegroom: true },
-        { id: 14, seatNumber: "5B", isOccupied: false, hasWindow: false, closeToExit: false, hasLegroom: true },
-        { id: 15, seatNumber: "5C", isOccupied: true, hasWindow: true, closeToExit: true, hasLegroom: true },
-        { id: 16, seatNumber: "6A", isOccupied: false, hasWindow: false, closeToExit: true, hasLegroom: true },
-        { id: 17, seatNumber: "6B", isOccupied: false, hasWindow: false, closeToExit: false, hasLegroom: true },
-        { id: 18, seatNumber: "6C", isOccupied: true, hasWindow: true, closeToExit: false, hasLegroom: true },
-    ];
+function FlightDetails ({seatsData}: Props) {
 
+    const [seats, setSeats] = useState<SeatDataInterface[]>([]);
     const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
     const [filters, setFilters] = useState<SeatFiltersInterface>({
         hasWindow: false,
@@ -48,9 +33,12 @@ function FlightDetails () {
     }
     
     const handleFilter = (selectedFilters: SeatFiltersInterface) => {
-        console.log(selectedFilters)
         setFilters(selectedFilters);
     };
+
+    useEffect(() => {
+        setSeats(seatsData);
+    },[seatsData]);
 
     return (
         <div className="flight-details-main-container">
@@ -65,23 +53,9 @@ function FlightDetails () {
                 </div>
                 <div className="flight-details-column">
                     <Typography variant="h5" gutterBottom>Seating Plan</Typography>
-                    {/* <Grid className="flight-details-grid" container spacing={1} justifyContent="center">
-                        {sampleSeats.map((seat) => (
-                            <Grid className="flight-details-card" size={{ xs: 12, sm: 2 }}  key={seat.id}>
-                                <Seat
-                                    seatNumber={seat.seatNumber}
-                                    isOccupied={seat.isOccupied}
-                                    hasWindow={seat.hasWindow}
-                                    closeToExit={seat.closeToExit}
-                                    hasLegroom={seat.hasLegroom}
-                                    onSelect={() => setSelectedSeat(seat.seatNumber)}
-                                />
-                            </Grid>
-                        ))}
-                    </Grid> */}
                     <Grid container spacing={2} direction="column">
-                        {Array.from({ length: Math.ceil(sampleSeats.length / seatsPerRow) }, (_, rowIndex) => {
-                        const rowSeats = sampleSeats.slice(rowIndex * seatsPerRow, (rowIndex + 1) * seatsPerRow);
+                        {Array.from({ length: Math.ceil(seats.length / seatsPerRow) }, (_, rowIndex) => {
+                        const rowSeats = seats.slice(rowIndex * seatsPerRow, (rowIndex + 1) * seatsPerRow);
                             return (
                                 <Grid key={rowIndex} container spacing={1} justifyContent="center" alignItems="center">
                                     {rowSeats.map((seat, seatIndex) => (

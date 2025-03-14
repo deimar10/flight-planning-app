@@ -9,17 +9,17 @@ import { ThemeProvider, CssBaseline } from "@mui/material";
 import theme from "./Theme";
 import axios from 'axios';
 import { FlightDataInterface } from './interface';
+import { SeatDataInterface } from './interface';
 
 function App() {
 
   const [flights, setFlights] = useState<FlightDataInterface[]>([]);
-   
-  useEffect(() => {
+  const [seats, setSeats] = useState<SeatDataInterface[]>([]);
+
+  const getFlights = () => {
     axios.get('http://localhost:8080/api/flights')
       .then(response => {
-        console.log("Fetched flights:", response.data);
-
-        const changeDateFormat = response.data.map((flight: FlightDataInterface) => {
+        const changeDateFormat = response.data?.map((flight: FlightDataInterface) => {
           const startDate = new Date(flight.startDate);
           const endDate = new Date(flight.endDate);
 
@@ -40,6 +40,20 @@ function App() {
         setFlights(changeDateFormat || []);
       })
       .catch(error => console.error("Error fetching campaigns:", error));
+  };
+
+  const getSeats = () => {
+    axios.get('http://localhost:8080/api/flights/1/seats')
+    .then(response => {
+      console.log("Fetched seats", response.data)
+      setSeats(response.data);
+    })
+    .catch(error => console.error("Error fetching seats:", error));
+  };
+   
+  useEffect(() => {
+      getFlights();
+      getSeats();
   },[]);
 
   return (
@@ -54,7 +68,9 @@ function App() {
                     flights={flights}
                   />}
                   />
-                  <Route path="/flight-details/:id" element={<FlightDetails/>}
+                  <Route path="/flight-details/:id" element={<FlightDetails
+                    seatsData={seats}
+                  />}
                   />
               </Routes>
             </BrowserRouter>

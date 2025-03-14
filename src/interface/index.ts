@@ -19,3 +19,13 @@ export interface SeatFiltersInterface {
     hasLegSpace: boolean,
     closeToExit: boolean
 }
+
+export interface SeatDataInterface {
+    id: number,
+    flightId: number,
+    seatNumber: string
+    isOccupied: boolean,
+    hasWindow: boolean,
+    closeToExit: boolean,
+    hasLegroom: boolean
+}
