@@ -85,7 +85,7 @@ function FlightDetails ({flights}: Props) {
                 </div>
                 <div className="flight-details-column">
                     <Typography variant="h4" gutterBottom>Select Your Seat – {flightInfo.destination} Flight</Typography>
-                    <Grid container spacing={2} direction="column">
+                    <Grid className="flight-details-seat-grid" container spacing={2} direction="column">
                         {Array.from({ length: Math.ceil(seats.length / seatsPerRow) }, (_, rowIndex) => {
                         const rowSeats = seats.slice(rowIndex * seatsPerRow, (rowIndex + 1) * seatsPerRow);
                             return (
