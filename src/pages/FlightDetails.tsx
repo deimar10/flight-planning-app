@@ -6,11 +6,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Typography } from "@mui/material";
 import Grid from '@mui/material/Grid2';
 import Seat from "../components/Seat";
-import { SeatFiltersInterface } from "../interface";
+import { FlightDataInterface, SeatFiltersInterface } from "../interface";
 import { SeatDataInterface } from '../interface';
 import axios from "axios";
 
-function FlightDetails () {
+interface Props {
+    flights: FlightDataInterface[],
+}
+
+function FlightDetails ({flights}: Props) {
 
     const { id } = useParams();
 
@@ -20,6 +24,11 @@ function FlightDetails () {
         hasWindow: false,
         hasLegSpace: false,
         closeToExit: false,
+    });
+    const [flightInfo, setFlightInfo] = useState({
+        id: 0,
+        destination: '',
+        price: 0,
     });
     
     const seatsPerRow = 6;
@@ -35,13 +44,32 @@ function FlightDetails () {
         setFilters(selectedFilters);
     };
 
+    const getFlightInfo = () => {
+        flights.forEach((flight: FlightDataInterface) => {
+            if (flight.id === Number(id)) {
+                setFlightInfo(prevInfo => ({
+                    ...prevInfo,
+                    id: flight.id,
+                    destination: flight.destination,
+                    price: flight.price
+                }));
+            }
+        });
+    };
+
     useEffect(() => {
         if (id) {
             axios.get(`http://localhost:8080/api/flights/${id}/seats`)
-                .then(response => setSeats(response.data))
-                .catch(error => console.error("Error fetching seats:", error));
+            .then(response => setSeats(response.data))
+            .catch(error => console.error("Error fetching seats:", error));
         }
      }, [id]);
+
+     useEffect(() => {
+        if (flights.length > 0) {
+            getFlightInfo();
+        }
+    }, [flights]); 
 
     return (
         <div className="flight-details-main-container">
@@ -52,10 +80,11 @@ function FlightDetails () {
                 <div className="flight-details-column">
                     <SeatFilters 
                         onFilter={handleFilter}
+                        price={flightInfo.price}
                     />
                 </div>
                 <div className="flight-details-column">
-                    <Typography variant="h5" gutterBottom>Seating Plan</Typography>
+                    <Typography variant="h4" gutterBottom>Select Your Seat – {flightInfo.destination} Flight</Typography>
                     <Grid container spacing={2} direction="column">
                         {Array.from({ length: Math.ceil(seats.length / seatsPerRow) }, (_, rowIndex) => {
                         const rowSeats = seats.slice(rowIndex * seatsPerRow, (rowIndex + 1) * seatsPerRow);

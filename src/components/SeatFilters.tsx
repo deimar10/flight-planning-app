@@ -5,12 +5,13 @@ import { SeatFiltersInterface } from "../interface";
 
 interface Props {
     onFilter: (filters: SeatFiltersInterface) => void; 
+    price: number,
 }
 
-const SeatFilters = ({ onFilter }: Props) => {
+const SeatFilters = ({ onFilter, price }: Props) => {
 
     const [quantity, setQuantity] = useState(1);
-    const [calculatedPrice, setCalculatedPrice] = useState<number>(635);
+    const [calculatedPrice, setCalculatedPrice] = useState<number>(price);
     const [filters, setFilters] = useState<SeatFiltersInterface>({
         hasWindow: false,
         hasLegSpace: false,
@@ -30,7 +31,11 @@ const SeatFilters = ({ onFilter }: Props) => {
 
     useEffect(() => {
         onFilter(filters);
-    }, [filters])
+    }, [filters, onFilter]);
+
+    useEffect(() => {
+        setCalculatedPrice(price);
+    }, [price]);
 
     return (
         <div className="seat-filter-main-container">

@@ -56,7 +56,9 @@ function App() {
                     flights={flights}
                   />}
                   />
-                  <Route path="/flight-details/:id" element={<FlightDetails />}
+                  <Route path="/flight-details/:id" element={<FlightDetails 
+                    flights={flights}
+                  />}
                   />
               </Routes>
             </BrowserRouter>
