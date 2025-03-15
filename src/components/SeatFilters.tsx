@@ -19,7 +19,7 @@ const SeatFilters = ({ onFilter, price }: Props) => {
     });
 
     const calculate = () => {
-        setCalculatedPrice(635  * quantity);
+        setCalculatedPrice(price  * quantity);
     }
 
     const handleFilterChange = (filterName: keyof SeatFiltersInterface) => {
@@ -72,7 +72,7 @@ const SeatFilters = ({ onFilter, price }: Props) => {
                         onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
                         inputProps={{ min: 1, max: 10 }}
                     />
-                  <Button variant="contained">Apply filters</Button>
+                  <Button variant="contained" onClick={calculate}>Apply filters</Button>
                 </div>
             </fieldset>
         </div>
