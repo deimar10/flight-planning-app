@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import '../scss/components/SeatFilters.scss';
 import { Button, TextField, FormControlLabel, Checkbox } from "@mui/material";
 import { SeatFiltersInterface } from "../interface";

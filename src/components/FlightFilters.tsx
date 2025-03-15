@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import '../scss/components/FlightFilters.scss';
 import {FlightFiltersInterface} from "../interface";
 import { TextField, Slider, Typography , Button } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 
 interface Props {
   onFilter: (filters: FlightFiltersInterface) => void; 
