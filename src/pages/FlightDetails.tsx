@@ -59,7 +59,7 @@ function FlightDetails ({flights}: Props) {
 
     useEffect(() => {
         if (id) {
-            axios.get(`http://localhost:8080/api/flights/${id}/seats`)
+            axios.get(`${import.meta.env.VITE_API_BASE_URL}/${id}/seats`)
             .then(response => setSeats(response.data))
             .catch(error => console.error("Error fetching seats:", error));
         }

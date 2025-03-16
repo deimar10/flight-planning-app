@@ -15,7 +15,7 @@ function App() {
   const [flights, setFlights] = useState<FlightDataInterface[]>([]);
 
   const getFlights = () => {
-    axios.get('http://localhost:8080/api/flights')
+    axios.get(`${import.meta.env.VITE_API_BASE_URL}`)
       .then(response => {
         const changeDateFormat = response.data?.map((flight: FlightDataInterface) => {
           const startDate = new Date(flight.startDate);
