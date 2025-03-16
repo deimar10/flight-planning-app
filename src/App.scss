@@ -1,8 +1,11 @@
+@use './scss/config.scss' as *;
+
 #root {
   width: 100%;
   margin: 0 auto;
   padding: 3rem;
   text-align: center;
+  color: $text-color-dark;
 }
 
 .App {
