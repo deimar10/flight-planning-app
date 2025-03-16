@@ -38,7 +38,6 @@ function Home({flights}: Props) {
         }
         if (selectedStartDate && selectedEndDate) {
             filtered = filtered.filter((flight) => flight.startDate <= selectedStartDate && flight.endDate >= selectedEndDate);
-           /*  filtered = filtered.filter((flight) => flight.startDate <= date && flight.endDate >= date); */
         }
         if (price.length === 2) {
             filtered = filtered.filter((flight) => flight.price >= price[0] && flight.price <= price[1]);
