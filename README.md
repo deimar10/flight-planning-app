@@ -1,54 +1,30 @@
-# React + TypeScript + Vite
+## Table of Contents
+* <strong>Overview</strong>
+    * <strong>Stack</strong>
+    * <strong>Frontend Setup and Run Instructions
+  
+## Stack
+<div id="badges" style="display: flex; justify-content: start;">
+    <img src="https://img.shields.io/badge/React-white?style=for-the-badge&logo=react&logoColor=blue" alt="React Badge"/>
+    <img style="margin-left: 0.5rem;" src="https://img.shields.io/badge/Sass-white?style=for-the-badge&logo=sass&logoColor=#CC6699" alt="Sass Badge"/>
+    <img src="https://img.shields.io/badge/css-white?style=for-the-badge&logo=css&logoColor=blue" alt="CSS Badge"/>
+    <img src="https://img.shields.io/badge/spring boot-white?style=for-the-badge&logo=spring-boot&logoColor=#f55247" alt="spring Badge"/>
+    <img style="margin-left: 0.5rem;" src="https://img.shields.io/badge/MySQL-white?style=for-the-badge&logo=mysql&logoColor=black" alt="MySQL Badge"/>
+    <img style="margin-left: 0.5rem;" src="https://img.shields.io/badge/MUI-white?style=for-the-badge&logo=mui&logoColor=blue" alt="MUI Badge"/>
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Frontend Setup and Run Instructions
+  * Ensure you have the following installed and added to your system's PATH:
+    * Node.js: Install the latest version from https://nodejs.org/
+    * npm (bundled with Node.js): Verify installation with:```npm -v```
+    * git: You can download Git from https://git-scm.com/downloads
+  * Clone the Repository
+    * ```git clone <repository_url>```
+    * ```cd <frontend_folder_name>```
+  * Run the following command to install all required dependencies:
+    * ```npm install```
+  * Set Up Environment Variables
+    * Create a .env file in the root of the frontend folder
+    * Replace the VITE_API_BASE_URL value with the actual backend API URL
+  * To start the development server, run: ```npm run dev```
+  * Access the app in your browser at http://localhost:3000 or the port provided by Vite
